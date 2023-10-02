@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Box, Center, Heading, UnorderedList, ListItem, Input, Button } from '@chakra-ui/react';
+import { Box, Center, Heading, Input, Button } from '@chakra-ui/react';
+import TaskList from './components/TaskList';
 
 interface Task {
   id: number;
@@ -9,7 +10,7 @@ interface Task {
 
 export default function TaskWidget() {
   const [singleTask, setSingleTask] = useState<string>('');
-  const [tasks, setTasks] = useState([
+  const [tasks, setTasks] = useState<Task[]>([
     { id: 1, description: 'first task', completed: false },
     { id: 2, description: 'second task', completed: false }
   ]);
@@ -20,6 +21,13 @@ export default function TaskWidget() {
     setSingleTask('');
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      addTask();
+    }
+  };
+
   const completeTask = (id: number) => {
     setTasks(tasks.map(task => (task.id === id ? { ...task, completed: !task.completed } : task)));
   };
@@ -27,20 +35,14 @@ export default function TaskWidget() {
   return (
     <Center w="100%" h="100vh">
       <Box bg="blackAlpha.700" borderRadius="10px" boxShadow="0 0 24px 2px rgba(0, 0, 100, 0.8)" w="100%" p={4} color="white">
-        <Heading as="h3" fontSize="1.25rem" mb={2}>
+        <Heading as="h3" fontSize="1.25rem" mb={4}>
           Tasks for the day
         </Heading>
-        <Input mb={2} value={singleTask} onChange={e => setSingleTask(e.currentTarget.value)} />
+        <Input mb={5} value={singleTask} onChange={e => setSingleTask(e.currentTarget.value)} onKeyDown={handleKeyDown} />
         <Button mb={4} onClick={addTask}>
           Add Task
         </Button>
-        <UnorderedList>
-          {tasks.map(task => (
-            <ListItem color={task.completed ? 'red' : ''} key={task.id} onClick={() => completeTask(task.id)}>
-              {task.description}
-            </ListItem>
-          ))}
-        </UnorderedList>
+        <TaskList tasks={tasks} completeTask={completeTask} />
       </Box>
     </Center>
   );
