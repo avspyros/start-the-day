@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Box, Center, Heading, Input, Button } from '@chakra-ui/react';
+import { Box, Center, Heading } from '@chakra-ui/react';
 import TaskList from './components/TaskList';
+import TaskForm from './components/TaskForm';
 
 interface Task {
   id: number;
@@ -24,7 +25,9 @@ export default function TaskWidget() {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      addTask();
+      if (singleTask.trim() !== '') {
+        addTask();
+      }
     }
   };
 
@@ -38,10 +41,7 @@ export default function TaskWidget() {
         <Heading as="h3" fontSize="1.25rem" mb={4}>
           Tasks for the day
         </Heading>
-        <Input mb={5} value={singleTask} onChange={e => setSingleTask(e.currentTarget.value)} onKeyDown={handleKeyDown} />
-        <Button mb={4} onClick={addTask}>
-          Add Task
-        </Button>
+        <TaskForm singleTask={singleTask} setSingleTask={setSingleTask} addTask={addTask} handleKeyDown={handleKeyDown} />
         <TaskList tasks={tasks} completeTask={completeTask} />
       </Box>
     </Center>
