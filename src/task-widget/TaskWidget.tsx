@@ -11,10 +11,12 @@ interface Task {
 
 export default function TaskWidget() {
   const [singleTask, setSingleTask] = useState<string>('');
-  const [tasks, setTasks] = useState<Task[]>([
-    { id: 1, description: 'first task', completed: false },
-    { id: 2, description: 'second task', completed: false }
-  ]);
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  // Fake data
+
+  // { id: 1, description: 'first task', completed: false },
+  // { id: 2, description: 'second task', completed: false }
 
   const addTask = () => {
     const newTask: Task = { id: Date.now(), description: singleTask, completed: false };
@@ -35,14 +37,18 @@ export default function TaskWidget() {
     setTasks(tasks.map(task => (task.id === id ? { ...task, completed: !task.completed } : task)));
   };
 
+  const deleteTask = (id: number) => {
+    setTasks(tasks.filter(task => task.id !== id));
+  };
+
   return (
     <Center w="100%" h="100vh">
-      <Box bg="blackAlpha.700" borderRadius="10px" boxShadow="0 0 24px 2px rgba(0, 0, 100, 0.8)" w="100%" p={4} color="white">
-        <Heading as="h3" fontSize="1.25rem" mb={4}>
+      <Box w="100%" bg="blackAlpha.700" p={4} borderRadius="10px" boxShadow="0 0 12px 2px rgba(0, 0, 100, 0.7)" color="white">
+        <Heading as="h3" fontSize="2xl" mb="2rem">
           Tasks for the day
         </Heading>
         <TaskForm singleTask={singleTask} setSingleTask={setSingleTask} addTask={addTask} handleKeyDown={handleKeyDown} />
-        <TaskList tasks={tasks} completeTask={completeTask} />
+        <TaskList tasks={tasks} completeTask={completeTask} deleteTask={deleteTask} />
       </Box>
     </Center>
   );

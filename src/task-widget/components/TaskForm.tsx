@@ -1,4 +1,4 @@
-import { Box, Input, Button } from '@chakra-ui/react';
+import { Box, Input, Button, Flex } from '@chakra-ui/react';
 
 interface TaskFormProps {
   singleTask: string;
@@ -10,15 +10,17 @@ interface TaskFormProps {
 const TaskForm: React.FC<TaskFormProps> = ({ singleTask, setSingleTask, addTask, handleKeyDown }) => {
   return (
     <Box>
-      <Input mb={5} value={singleTask} onChange={e => setSingleTask(e.currentTarget.value)} onKeyDown={handleKeyDown} />
-      <Button
-        mb={4}
-        onClick={() => {
-          singleTask.trim() !== '' && addTask;
-        }}
-      >
-        Add Task
-      </Button>
+      <Flex>
+        <Input mb="2rem" mr={2} value={singleTask} onChange={e => setSingleTask(e.currentTarget.value)} onKeyDown={handleKeyDown} />
+        <Button
+          mb={4}
+          onClick={() => {
+            singleTask.trim() !== '' && addTask;
+          }}
+        >
+          Add Task
+        </Button>
+      </Flex>
     </Box>
   );
 };
