@@ -19,7 +19,7 @@ export default function TaskList({ tasks, completeTask, deleteTask }: TaskListPr
   return (
     <UnorderedList minH="10rem" styleType="none" pl={1} m={0}>
       {tasks.map(task => (
-        <ListItem mb={4} borderBottom="1px solid #aaa" key={task.id}>
+        <ListItem mb={2} p={1} borderBottom="1px solid #aaa" key={task.id}>
           <Flex justifyContent="space-between" alignItems="center">
             <HStack>
               <Checkbox size="lg" name="taskComplete" colorScheme="orange" isChecked={task.completed} onChange={() => completeTask(task.id)}></Checkbox>

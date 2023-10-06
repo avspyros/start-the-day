@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Box, Center, Heading } from '@chakra-ui/react';
+import { Box, Center } from '@chakra-ui/react';
+import TaskHeader from './components/TaskHeader';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
 
@@ -30,6 +31,10 @@ export default function TaskWidget() {
     setTasks(tasks.filter(task => task.id !== id));
   };
 
+  const clearTasks = () => {
+    setTasks([]);
+  };
+
   // Save tasks to local storage whenever tasks change
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -38,9 +43,7 @@ export default function TaskWidget() {
   return (
     <Center w="100%" h="100vh">
       <Box w="100%" bg="blackAlpha.700" p={4} borderRadius="10px" boxShadow="0 0 12px 2px rgba(0, 0, 100, 0.7)" color="white">
-        <Heading as="h3" fontSize="2xl" mb="2rem">
-          Tasks for the day
-        </Heading>
+        <TaskHeader tasks={tasks} clearTasks={clearTasks} />
         <TaskForm singleTask={singleTask} setSingleTask={setSingleTask} addTask={addTask} />
         <TaskList tasks={tasks} completeTask={completeTask} deleteTask={deleteTask} />
       </Box>
