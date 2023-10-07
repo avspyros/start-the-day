@@ -42,7 +42,7 @@ export default function TaskWidget() {
 
   return (
     <Center w="100%" h="100vh">
-      <Box w="100%" bg="blackAlpha.700" p={4} borderRadius="10px" boxShadow="0 0 12px 2px rgba(0, 0, 100, 0.7)" color="white">
+      <Box w="100%" bg="blackAlpha.600" p={4} borderRadius="10px" boxShadow="0 0 12px 2px rgba(0, 0, 100, 0.7)" color="white">
         <TaskHeader tasks={tasks} clearTasks={clearTasks} />
         <TaskForm singleTask={singleTask} setSingleTask={setSingleTask} addTask={addTask} />
         <TaskList tasks={tasks} completeTask={completeTask} deleteTask={deleteTask} />

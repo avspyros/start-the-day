@@ -1,4 +1,4 @@
-import { Flex, HStack, Heading, IconButton, Text } from '@chakra-ui/react';
+import { Flex, HStack, Heading, IconButton, CircularProgress, CircularProgressLabel } from '@chakra-ui/react';
 import { RepeatIcon } from '@chakra-ui/icons';
 
 interface Task {
@@ -14,24 +14,27 @@ interface TaskHeaderProps {
 
 function TaskHeader({ tasks, clearTasks }: TaskHeaderProps) {
   const completedTasksCount = tasks.filter(task => task.completed).length;
+  const tasksProgress = () => {
+    if (tasks.length !== 0) {
+      return (completedTasksCount * 100) / tasks.length;
+    }
+  };
 
   return (
     <Flex mb="2rem" justifyContent="space-between" alignItems="center">
-      <Heading as="h3" fontSize="2xl">
-        Tasks for the day
-      </Heading>
-      <HStack>
-        <Text fontSize="2xl" color={'green.500'}>
-          {completedTasksCount}
-        </Text>{' '}
-        <Text fontSize="2xl" color={'gray.400'}>
-          /
-        </Text>{' '}
-        <Text fontSize="2xl" color={'red.500'} mr={2}>
-          {tasks.length}
-        </Text>
+      <HStack spacing="1rem">
+        <Heading as="h3" fontSize="2xl">
+          Tasks for the day
+        </Heading>
+        <CircularProgress value={tasksProgress()} color="orange.500" thickness="10px" size="3rem">
+          <CircularProgressLabel fontSize="0.75rem">
+            {completedTasksCount}/{tasks.length}
+          </CircularProgressLabel>
+        </CircularProgress>
       </HStack>
-      <IconButton icon={<RepeatIcon />} aria-label="Delete Task" colorScheme="red" size="xs" onClick={() => clearTasks()} />
+      <HStack>
+        <IconButton icon={<RepeatIcon />} aria-label="Delete Task" colorScheme="red" size="sm" fontSize="1rem" onClick={() => clearTasks()} />
+      </HStack>
     </Flex>
   );
 }
