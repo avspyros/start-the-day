@@ -1,18 +1,19 @@
 import { Container, Box } from '@chakra-ui/react';
 
-interface Props {
+interface WrapperProps {
   children: React.ReactNode;
 }
 
-const bgImg = 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80';
-
-function Wrapper({ children }: Props) {
-  // bgImage={`url(${bgImg})`} backgroundPosition="center" backgroundRepeat="no-repeat"
+function Wrapper({ children }: WrapperProps) {
   return (
-    <Box bg={'blue.500'}>
+    <Box bg="blue.500" h="100vh">
       <Container>{children}</Container>
     </Box>
   );
 }
 
 export default Wrapper;
+
+// const bgImg = 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80';
+
+// bgImage={`url(${bgImg})`} backgroundPosition="center" backgroundRepeat="no-repeat"
