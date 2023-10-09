@@ -1,15 +1,18 @@
 import Wrapper from './components/Wrapper';
 import Spacer from './components/Spacer';
-// import TaskWidget from './task-widget/TaskWidget';
+import WeatherWidget from './weather-widget/WeatherWidget';
 import QuotesWidget from './quotes-widget/QuotesWidget';
+import TaskWidget from './task-widget/TaskWidget';
 
 export default function App() {
   return (
     <Wrapper>
       <Spacer />
-      <QuotesWidget />
+      <WeatherWidget />
       <Spacer />
-      {/* <TaskWidget /> */}
+      {/* <QuotesWidget />
+      <Spacer />
+      <TaskWidget /> */}
     </Wrapper>
   );
 }
