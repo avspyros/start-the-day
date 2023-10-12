@@ -2,16 +2,24 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Box, Text } from '@chakra-ui/react';
 
-const weatherUrl = 'https://api.open-meteo.com/v1/forecast?latitude=37.9838&longitude=23.7278&daily=weathercode,temperature_2m_max,temperature_2m_min&current_weather=true&timezone=auto&forecast_days=3';
+const weatherUrl = 'https://api.open-meteo.com/v1/forecast?latitude=37.9838&longitude=23.7278&current=temperature_2m,weathercode';
+
+// interface weatherDisplay {
+//   currentTemp: number;
+//   currentDescription: string;
+// }
 
 function Weather() {
-  const [currentWeather, setCurrentWeather] = useState<string>('');
+  const [currentWeather, setCurrentWeather] = useState<number>();
   const [error, setError] = useState<string>('');
 
   const fetchWeather = () => {
     axios
       .get(weatherUrl)
-      .then(res => setCurrentWeather(res.data.current_weather.temperature))
+      .then(res => {
+        const temperature = Math.round(res.data.current.temperature_2m);
+        setCurrentWeather(temperature);
+      })
       .catch(err => setError(err.message));
   };
 
@@ -26,7 +34,11 @@ function Weather() {
           {error}
         </Text>
       )}
-      {currentWeather && <Text fontSize="2xl">{currentWeather}</Text>}
+      {currentWeather && (
+        <Text fontSize="2xl" fontWeight="bold">
+          {currentWeather} &#8451;
+        </Text>
+      )}
     </Box>
   );
 }

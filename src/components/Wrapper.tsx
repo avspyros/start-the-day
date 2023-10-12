@@ -6,7 +6,7 @@ interface WrapperProps {
 
 function Wrapper({ children }: WrapperProps) {
   return (
-    <Box bg="blue.500" h="100vh">
+    <Box bg="blue.500" minH="100vh">
       <Container>{children}</Container>
     </Box>
   );
