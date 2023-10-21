@@ -27,7 +27,7 @@ function Settings({ widgetVisibility, toggleWidgetVisibility }: SettingsProps) {
           <ModalCloseButton />
           <ModalBody>
             <FormControl>
-              <Flex justify="space-between">
+              <Flex justify="space-between" mb="1rem">
                 <FormLabel mb="0" htmlFor="show-weather-widget">
                   Weather Widget:
                 </FormLabel>
@@ -36,7 +36,7 @@ function Settings({ widgetVisibility, toggleWidgetVisibility }: SettingsProps) {
                   <Text fontSize="sm">Show/Hide</Text>
                 </HStack>
               </Flex>
-              <Flex justify="space-between">
+              <Flex justify="space-between" mb="1rem">
                 <FormLabel mb="0" htmlFor="show-quote-widget">
                   Quote Widget:
                 </FormLabel>
@@ -45,7 +45,7 @@ function Settings({ widgetVisibility, toggleWidgetVisibility }: SettingsProps) {
                   <Text fontSize="sm">Show/Hide</Text>
                 </HStack>
               </Flex>
-              <Flex justify="space-between">
+              <Flex justify="space-between" mb="1rem">
                 <FormLabel mb="0" htmlFor="show-task-widget">
                   Task Widget:
                 </FormLabel>

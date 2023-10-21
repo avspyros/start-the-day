@@ -24,10 +24,10 @@ function DateTime() {
   return (
     <Box mb=".5rem">
       <Flex justify="space-between" align="center">
-        <Heading as="h3" fontSize="2xl">
+        <Heading as="h3" fontSize="xl">
           Athens
         </Heading>
-        <Badge bg="orange.300" color="gray.700" borderRadius="8px" p=".3rem .5rem" fontSize=".9rem">
+        <Badge bg="orange.300" color="gray.700" borderRadius="8px" p=".2rem .4rem" fontSize=".75rem">
           {localDateTime}
         </Badge>
       </Flex>
