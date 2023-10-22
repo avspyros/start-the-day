@@ -44,12 +44,18 @@ function QuotesWidget() {
   }, []);
 
   return (
-    <Box sx={boxStyles}>
+    <Box sx={boxStyles} mb="2rem" w={{ base: '100%', md: '360px' }}>
       <Flex justify="space-between">
         <Heading as="h3" fontSize="xl" mb="1rem">
           Quote of the day
         </Heading>
-        <IconButton icon={<RepeatIcon />} aria-label="Generate Quote" colorScheme="orange" size="xs" onClick={() => generateQuote()} />
+        <IconButton
+          icon={<RepeatIcon />}
+          aria-label="Generate Quote"
+          colorScheme="orange"
+          size="xs"
+          onClick={() => generateQuote()}
+        />
       </Flex>
 
       {error && (

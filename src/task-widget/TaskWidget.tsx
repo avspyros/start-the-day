@@ -36,18 +36,15 @@ export default function TaskWidget() {
     setTasks([]);
   };
 
-  // Save tasks to local storage whenever tasks change
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
   return (
-    <Box sx={boxStyles}>
+    <Box sx={boxStyles} w={{ base: '100%', md: '480px' }}>
       <TaskHeader tasks={tasks} clearTasks={clearTasks} />
       <TaskForm singleTask={singleTask} setSingleTask={setSingleTask} addTask={addTask} />
       <TaskList tasks={tasks} completeTask={completeTask} deleteTask={deleteTask} />
     </Box>
   );
-}
-{
 }

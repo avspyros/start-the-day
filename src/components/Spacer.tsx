@@ -1,7 +1,11 @@
 import { Box } from '@chakra-ui/react';
 
 function Spacer() {
-  return <Box py="1rem"></Box>;
+  return (
+    // <Hide above="lg">
+    <Box py="1rem"></Box>
+    // </Hide>
+  );
 }
 
 export default Spacer;

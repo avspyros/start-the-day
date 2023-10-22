@@ -1,4 +1,4 @@
-import { Container, Box } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
 interface WrapperProps {
   children: React.ReactNode;
@@ -6,8 +6,10 @@ interface WrapperProps {
 
 function Wrapper({ children }: WrapperProps) {
   return (
-    <Box bg="blue.500" minH="100vh">
-      <Container>{children}</Container>
+    <Box bg="blue.500" minH="100vh" p="1rem">
+      {children}
+
+      {/* <Container>{children}</Container> */}
     </Box>
   );
 }
