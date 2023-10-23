@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Box, Text } from '@chakra-ui/react';
 
-const weatherUrl = 'https://api.open-meteo.com/v1/forecast?latitude=37.9838&longitude=23.7278&current=temperature_2m,weathercode';
+const weatherUrl =
+  'https://api.open-meteo.com/v1/forecast?latitude=37.9838&longitude=23.7278&current=temperature_2m,weathercode';
 
 // interface weatherDisplay {
 //   currentTemp: number;
@@ -35,7 +36,7 @@ function Weather() {
         </Text>
       )}
       {currentWeather && (
-        <Text fontSize="2xl" fontWeight="bold">
+        <Text fontSize={{ base: 'xl', md: '2xl' }} fontWeight="bold">
           {currentWeather} &#8451;
         </Text>
       )}

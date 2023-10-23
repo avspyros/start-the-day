@@ -13,6 +13,7 @@ interface Task {
 
 export default function TaskWidget() {
   const [singleTask, setSingleTask] = useState<string>('');
+
   const [tasks, setTasks] = useState<Task[]>(() => {
     const storedTasks = localStorage.getItem('tasks');
     return storedTasks ? JSON.parse(storedTasks) : [];

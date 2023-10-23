@@ -1,4 +1,4 @@
-import { Flex, Center } from '@chakra-ui/react';
+import { Flex, Center, Spacer } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import Wrapper from './components/Wrapper';
 import Settings from './settings-modal/Settings';
@@ -33,13 +33,17 @@ export default function App() {
 
   return (
     <Wrapper>
+      {/* SETTINGS MODAL  */}
       <Settings widgetVisibility={widgetVisibility} handleVisibility={handleVisibility} />
+
+      {/* TOP ROW WITH 2 WIDGETS  */}
       <Flex direction={{ base: 'column', md: 'row' }} justify="space-between">
         {!widgetVisibility.quote && <QuotesWidget />}
-
+        <Spacer />
         {!widgetVisibility.weather && <WeatherWidget />}
       </Flex>
 
+      {/* CENTER ROW WITH 1 WIDGET  */}
       <Center h={{ md: '40vh' }}>{!widgetVisibility.tasks && <TaskWidget />}</Center>
     </Wrapper>
   );

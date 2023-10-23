@@ -22,13 +22,30 @@ export default function TaskList({ tasks, completeTask, deleteTask }: TaskListPr
         <ListItem mb={2} p={1} borderBottom="1px solid #aaa" key={task.id}>
           <Flex justifyContent="space-between" alignItems="center">
             <HStack>
-              <Checkbox size="lg" name="taskComplete" colorScheme="orange" isChecked={task.completed} onChange={() => completeTask(task.id)}></Checkbox>
-              <Text fontSize="xl" pb="4px" cursor="pointer" textDecoration={task.completed ? 'line-through' : ''}>
+              <Checkbox
+                size="lg"
+                name="taskComplete"
+                colorScheme="orange"
+                isChecked={task.completed}
+                onChange={() => completeTask(task.id)}
+              ></Checkbox>
+              <Text
+                fontSize={{ base: 'lg', md: 'xl' }}
+                pb="4px"
+                cursor="pointer"
+                textDecoration={task.completed ? 'line-through' : ''}
+              >
                 {task.description}
               </Text>
             </HStack>
             <HStack>
-              <IconButton icon={<DeleteIcon />} aria-label="Delete Task" colorScheme="red" size="xs" onClick={() => deleteTask(task.id)} />
+              <IconButton
+                icon={<DeleteIcon />}
+                aria-label="Delete Task"
+                colorScheme="red"
+                size="xs"
+                onClick={() => deleteTask(task.id)}
+              />
             </HStack>
           </Flex>
         </ListItem>

@@ -17,8 +17,19 @@ const TaskForm: React.FC<TaskFormProps> = ({ singleTask, setSingleTask, addTask 
     <Box>
       <form onSubmit={handleSubmit}>
         <Flex>
-          <Input mb="2rem" mr={2} name="taskInput" value={singleTask} onChange={e => setSingleTask(e.currentTarget.value)} />
-          <Button type="submit" mb={4} onClick={() => singleTask.trim() !== '' && addTask()}>
+          <Input
+            mb="2rem"
+            mr={2}
+            name="taskInput"
+            value={singleTask}
+            onChange={e => setSingleTask(e.currentTarget.value)}
+          />
+          <Button
+            fontSize={{ base: '0.9rem', md: '1rem' }}
+            type="submit"
+            mb={4}
+            onClick={() => singleTask.trim() !== '' && addTask()}
+          >
             Add Task
           </Button>
         </Flex>

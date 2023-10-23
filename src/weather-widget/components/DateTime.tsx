@@ -24,7 +24,7 @@ function DateTime() {
   return (
     <Box mb=".5rem">
       <Flex justify="space-between" align="center">
-        <Heading as="h3" fontSize="xl">
+        <Heading as="h3" fontSize={{ base: 'lg', md: 'xl' }}>
           Athens
         </Heading>
         <Badge bg="orange.300" color="gray.700" borderRadius="8px" p=".2rem .4rem" fontSize=".75rem">

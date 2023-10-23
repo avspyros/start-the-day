@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Box, Flex, Heading, Text, IconButton, Spinner } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text, IconButton, Spinner, Tooltip } from '@chakra-ui/react';
 import { RepeatIcon } from '@chakra-ui/icons';
 import { boxStyles } from '../globalStyles';
 
@@ -46,16 +46,18 @@ function QuotesWidget() {
   return (
     <Box sx={boxStyles} mb="2rem" w={{ base: '100%', md: '360px' }}>
       <Flex justify="space-between">
-        <Heading as="h3" fontSize="xl" mb="1rem">
+        <Heading as="h3" fontSize="lg" mb="1rem">
           Quote of the day
         </Heading>
-        <IconButton
-          icon={<RepeatIcon />}
-          aria-label="Generate Quote"
-          colorScheme="orange"
-          size="xs"
-          onClick={() => generateQuote()}
-        />
+        <Tooltip label="Random Quote" aria-label="A tooltip" borderRadius="8px" placement="left-start" openDelay={800}>
+          <IconButton
+            icon={<RepeatIcon />}
+            aria-label="Generate Quote"
+            colorScheme="orange"
+            size="xs"
+            onClick={() => generateQuote()}
+          />
+        </Tooltip>
       </Flex>
 
       {error && (
@@ -66,7 +68,7 @@ function QuotesWidget() {
       {loading && <Spinner color="orange.400" />}
       {quoteResult && (
         <>
-          <Text as="cite" color="orange.400">
+          <Text as="cite" fontSize={{ base: '0.9rem', md: '1rem' }} color="orange.400">
             {quoteResult.quote}
           </Text>
           <Flex mt="1rem;" justify="end">
