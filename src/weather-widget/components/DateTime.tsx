@@ -1,20 +1,24 @@
 import { useState, useEffect } from 'react';
-import moment from 'moment';
-import { Box, Flex, Badge, Heading } from '@chakra-ui/react';
+import { Box, Flex, Badge } from '@chakra-ui/react';
 
 function DateTime() {
-  const [localDateTime, setLocalDateTime] = useState('');
+  const [localDate, setLocalDate] = useState('');
+  const [localTime, setLocalTime] = useState('');
 
   useEffect(() => {
-    const updateDateTime = () => {
-      const currentDateTime = moment();
-      const formattedDateTime = currentDateTime.format('MMMM Do YYYY, h:mm:ss a');
-      setLocalDateTime(formattedDateTime);
+    const getDateTime = () => {
+      let current = new Date();
+
+      let currentDate = current.toDateString();
+      let currentTime = current.toLocaleTimeString();
+
+      setLocalDate(currentDate);
+      setLocalTime(currentTime);
     };
 
-    updateDateTime();
+    getDateTime();
 
-    const intervalId = setInterval(updateDateTime, 1000);
+    const intervalId = setInterval(getDateTime, 1000);
 
     return () => {
       clearInterval(intervalId);
@@ -22,13 +26,13 @@ function DateTime() {
   }, []);
 
   return (
-    <Box mb=".5rem">
+    <Box mb="1rem">
       <Flex justify="space-between" align="center">
-        <Heading as="h3" fontSize={{ base: 'lg', md: 'xl' }}>
-          Athens
-        </Heading>
-        <Badge bg="orange.300" color="gray.700" borderRadius="8px" p=".2rem .4rem" fontSize=".75rem">
-          {localDateTime}
+        <Badge bg="orange.400" color="gray.700" borderRadius="4px" p=".1rem .4rem" fontSize=".9rem">
+          {localDate}
+        </Badge>
+        <Badge bg="orange.400" color="gray.700" borderRadius="4px" p=".1rem .4rem" fontSize=".9rem">
+          {localTime}
         </Badge>
       </Flex>
     </Box>
