@@ -1,31 +1,38 @@
 import { useState, useEffect } from 'react';
+import { BASE_URL, API_KEY } from '../../services';
 import axios from 'axios';
-import { Box, HStack, Heading, Text } from '@chakra-ui/react';
+import { Box, VStack, HStack, Heading, Text, Image, Tooltip } from '@chakra-ui/react';
 
-const weatherUrl =
-  'https://api.open-meteo.com/v1/forecast?latitude=37.9838&longitude=23.7278&current=temperature_2m,weathercode';
+const weatherUrl = `${BASE_URL}/data/2.5/weather?lat=37.9838&lon=23.7278&appid=${API_KEY}&units=metric`;
 
 interface weatherDisplay {
-  currentTemp: number;
-  currentDescription: string;
+  temperature: number;
+  description: string;
+  icon: string;
+  min: number;
+  max: number;
 }
 
 function Weather() {
-  // const [currentWeather, setCurrentWeather] = useState<number>();
-  const [currentWeather, setCurrentWeather] = useState<weatherDisplay>({
-    currentTemp: 21,
-    currentDescription: 'Coldy'
-  });
+  const [currentWeather, setCurrentWeather] = useState<weatherDisplay | null>();
   const [error, setError] = useState<string>('');
 
   const fetchWeather = () => {
     axios
       .get(weatherUrl)
       .then(res => {
-        // const temperature = Math.round(res.data.current.temperature_2m);
-        console.log(res.data);
+        console.log(res.data.main);
+        const data = res.data;
 
-        // setCurrentWeather(temperature);
+        const weatherData = {
+          temperature: Math.round(data.main.temp),
+          description: data.weather[0].description,
+          icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`,
+          min: Math.round(data.main.temp_min),
+          max: Math.round(data.main.temp_max)
+        };
+
+        setCurrentWeather(weatherData);
       })
       .catch(err => setError(err.message));
   };
@@ -34,25 +41,38 @@ function Weather() {
     fetchWeather();
   }, []);
 
+  const { temperature, description, icon, min, max } = currentWeather || {};
+
   return (
     <Box>
-      <Heading as="h3" fontSize={{ base: 'lg', md: 'xl' }} fontWeight="400" color="gray.400" mb="0.5rem">
-        ATHENS
-      </Heading>
-
       {error && (
         <Text fontSize="lg" color="red.500">
           {error}
         </Text>
       )}
       {currentWeather && (
-        <HStack spacing="24px">
-          <Text fontSize={{ base: 'xl', md: '2xl' }} fontWeight="bold">
-            {currentWeather.currentTemp} &#8451;
+        <HStack justify="space-evenly" bg="whiteAlpha.300" borderRadius="4px" px="0.5rem">
+          <Heading as="h3" fontSize={{ base: 'sm', md: 'md' }} fontWeight="400" color="gray.400">
+            ATHENS
+          </Heading>
+
+          <Text fontSize={{ base: 'xl', md: '2xl' }} fontWeight="500">
+            {temperature}{' '}
+            <Text as="span" fontWeight="400">
+              &#8451;
+            </Text>
           </Text>
-          <Text fontSize={{ base: 'xl', md: '2xl' }} fontWeight="400" color="gray.400">
-            {currentWeather.currentDescription}
-          </Text>
+          <VStack gap="0">
+            <Text fontSize={{ base: 'sm', md: 'md' }} fontWeight="400" color="yellow.300">
+              {max}
+            </Text>
+            <Text fontSize={{ base: 'sm', md: 'md' }} fontWeight="400" color="blue.300">
+              {min}
+            </Text>
+          </VStack>
+          <Tooltip label={description} aria-label="A tooltip" borderRadius="8px" placement="bottom-end" openDelay={800}>
+            <Image src={icon} />
+          </Tooltip>
         </HStack>
       )}
     </Box>

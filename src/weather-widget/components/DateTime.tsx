@@ -26,7 +26,7 @@ function DateTime() {
   }, []);
 
   return (
-    <Box mb="1rem">
+    <Box>
       <Flex justify="space-between" align="center">
         <Badge bg="orange.400" color="gray.700" borderRadius="4px" p=".1rem .4rem" fontSize=".9rem">
           {localDate}
