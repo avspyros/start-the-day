@@ -1,4 +1,4 @@
-import { Input, FormLabel, Flex, Button } from '@chakra-ui/react';
+import { Input, FormLabel, Button } from '@chakra-ui/react';
 
 interface bgProps {
   id: string;
