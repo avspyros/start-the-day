@@ -37,7 +37,7 @@ export default function App() {
       <Settings widgetVisibility={widgetVisibility} handleVisibility={handleVisibility} />
 
       {/* TOP ROW WITH 2 WIDGETS  */}
-      <Flex direction={{ base: 'column', md: 'row' }} justify="space-between">
+      <Flex direction={{ base: 'column', md: 'row' }} justify="space-between" overflow="hidden">
         {!widgetVisibility.quote && <QuotesWidget />}
         <Spacer />
         {!widgetVisibility.weather && <WeatherWidget />}

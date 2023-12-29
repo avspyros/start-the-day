@@ -21,7 +21,7 @@ function Weather() {
     axios
       .get(weatherUrl)
       .then(res => {
-        console.log(res.data.main);
+        // console.log(res.data.main);
         const data = res.data;
 
         const weatherData = {
