@@ -12,10 +12,13 @@ function Wrapper({ children }: WrapperProps) {
     <Box
       bg="blue.500"
       minH="100vh"
+      maxW="2560"
+      m="auto"
       p="1rem"
       bgImage={`url(${bgImg})`}
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
+      backgroundSize="cover"
     >
       {children}
     </Box>

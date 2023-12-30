@@ -44,7 +44,7 @@ function QuotesWidget() {
   }, []);
 
   return (
-    <Box sx={boxStyles} mb="2rem" w={{ base: '100%', md: '360px' }}>
+    <Box sx={boxStyles}>
       <Flex justify="space-between">
         <Heading as="h3" fontSize="lg" mb="1rem">
           Quote of the day

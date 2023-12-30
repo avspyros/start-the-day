@@ -5,7 +5,7 @@ import Weather from './components/Weather';
 
 function WeatherWidget() {
   return (
-    <Box sx={boxStyles} mb="2rem" w={{ base: '100%', md: '360px' }} maxH="120px">
+    <Box sx={boxStyles}>
       <Flex direction="column" justify="space-between" h="100%">
         <DateTime />
         <Weather />

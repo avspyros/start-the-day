@@ -42,7 +42,7 @@ export default function TaskWidget() {
   }, [tasks]);
 
   return (
-    <Box sx={boxStyles} w={{ base: '100%', md: '480px' }}>
+    <Box sx={boxStyles}>
       <TaskHeader tasks={tasks} clearTasks={clearTasks} />
       <TaskForm singleTask={singleTask} setSingleTask={setSingleTask} addTask={addTask} />
       <TaskList tasks={tasks} completeTask={completeTask} deleteTask={deleteTask} />
