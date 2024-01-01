@@ -1,6 +1,6 @@
 import { SettingsIcon } from '@chakra-ui/icons';
 import SwitchSetting from './components/SwitchSetting';
-import BgInput from './components/BgInput';
+import BgSetting from './components/BgSetting';
 import {
   Modal,
   ModalOverlay,
@@ -25,9 +25,10 @@ interface WidgetVisibility {
 interface SettingProps {
   widgetVisibility: WidgetVisibility;
   handleVisibility: (widgetId: string) => void;
+  handleSubmit: (url: string) => void;
 }
 
-function Settings({ handleVisibility, widgetVisibility }: SettingProps) {
+function Settings({ handleVisibility, widgetVisibility, handleSubmit }: SettingProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -72,7 +73,7 @@ function Settings({ handleVisibility, widgetVisibility }: SettingProps) {
                 checked={widgetVisibility.tasks}
                 onChange={() => handleVisibility('tasks')}
               />
-              <BgInput id="set-bg" inputLabel="Background Image" />
+              <BgSetting id="set-bg" inputLabel="Background Image" onSubmit={handleSubmit} />
             </FormControl>
           </ModalBody>
           <ModalFooter>
