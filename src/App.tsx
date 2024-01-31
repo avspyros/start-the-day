@@ -13,7 +13,7 @@ interface WidgetVisibility {
   [key: string]: boolean;
 }
 
-// Fetching widget visibility status from local storage
+// Fetch widget visibility status from local storage
 const initialWidgetVisibility: WidgetVisibility = JSON.parse(
   localStorage.getItem('widgetVisibility') || '{"weather": false, "quote": false, "tasks": false}'
 );
@@ -32,7 +32,7 @@ export default function App() {
   };
 
   useEffect(() => {
-    // Update the widget visibility status in local storage
+    // Update widget visibility status in local storage
     localStorage.setItem('widgetVisibility', JSON.stringify(widgetVisibility));
   }, [widgetVisibility]);
 
@@ -54,7 +54,6 @@ export default function App() {
         </GridItem>
         <GridItem colStart={{ base: 1, md: 8, lg: 9 }} colSpan={{ base: 12, md: 6, lg: 5 }}>
           {!widgetVisibility.weather && <WeatherWidget />}
-          {}
         </GridItem>
         <GridItem
           colStart={{ base: 1, md: 3, lg: 4, xl: 5 }}
