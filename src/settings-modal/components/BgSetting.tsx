@@ -12,7 +12,7 @@ function BgSetting({ id, inputLabel, onSubmit }: bgProps) {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // console.log(url);
+    console.log(url);
     onSubmit(url);
   };
 

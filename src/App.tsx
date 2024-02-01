@@ -18,11 +18,14 @@ const initialWidgetVisibility: WidgetVisibility = JSON.parse(
   localStorage.getItem('widgetVisibility') || '{"weather": false, "quote": false, "tasks": false}'
 );
 
+// Fetch BG from local storage
+const initialBG =
+  localStorage.getItem('BG') ||
+  'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80';
+
 export default function App() {
   const [widgetVisibility, setWidgetVisibility] = useState<WidgetVisibility>(initialWidgetVisibility);
-  const [bgImg, setBgImg] = useState(
-    'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80'
-  );
+  const [bgImg, setBgImg] = useState(initialBG);
 
   const handleVisibility = (widgetId: string) => {
     setWidgetVisibility(widgetVisibility => ({
@@ -31,18 +34,23 @@ export default function App() {
     }));
   };
 
+  const handleBgChange = (url: string) => {
+    setBgImg(url);
+  };
+
   useEffect(() => {
-    // Update widget visibility status in local storage
+    // Update the widget visibility status in local storage
     localStorage.setItem('widgetVisibility', JSON.stringify(widgetVisibility));
   }, [widgetVisibility]);
 
+  useEffect(() => {
+    // Update BG image in local storage
+    localStorage.setItem('BG', JSON.stringify(bgImg));
+  }, [bgImg]);
+
   return (
     <Wrapper bgImg={bgImg}>
-      <Settings
-        widgetVisibility={widgetVisibility}
-        handleVisibility={handleVisibility}
-        handleSubmit={url => setBgImg(url)}
-      />
+      <Settings widgetVisibility={widgetVisibility} handleVisibility={handleVisibility} handleSubmit={handleBgChange} />
       <Grid
         gridTemplateColumns="repeat(12, 1fr)"
         gridTemplateRows="repeat(6, 1fr)"
