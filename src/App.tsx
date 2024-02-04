@@ -1,10 +1,14 @@
-import { Grid, GridItem } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
+import { Grid, GridItem } from '@chakra-ui/react';
+import { useLocalStorage } from './useLocalStorage';
 import Wrapper from './components/Wrapper';
 import Settings from './settings-modal/Settings';
 import WeatherWidget from './weather-widget/WeatherWidget';
 import QuotesWidget from './quotes-widget/QuotesWidget';
 import TaskWidget from './task-widget/TaskWidget';
+
+const defaultImageUrl =
+  'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80';
 
 interface WidgetVisibility {
   weather: boolean;
@@ -13,41 +17,43 @@ interface WidgetVisibility {
   [key: string]: boolean;
 }
 
-// Fetch widget visibility status from local storage
-const initialWidgetVisibility: WidgetVisibility = JSON.parse(
-  localStorage.getItem('widgetVisibility') || '{"weather": false, "quote": false, "tasks": false}'
-);
-
-// Fetch BG from local storage
-
-const initialBG =
-  localStorage.getItem('BG') ||
-  'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80';
-
 export default function App() {
-  const [widgetVisibility, setWidgetVisibility] = useState<WidgetVisibility>(initialWidgetVisibility);
-  const [bgImg, setBgImg] = useState(initialBG);
+  const { setItem, getItem } = useLocalStorage('BG');
+  const [bgImg, setBgImg] = useState(defaultImageUrl);
+  const { getItem: getWidgetStatus, setItem: setWidgetStatus } = useLocalStorage('widgetVisibility');
+  const [widgetVisibility, setWidgetVisibility] = useState<WidgetVisibility>(
+    () =>
+      getWidgetStatus() || {
+        weather: false,
+        quote: false,
+        tasks: false
+      }
+  );
+
+  // SIDE EFFECTS
+
+  useEffect(() => {
+    const storedBgImg = getItem();
+    setBgImg(storedBgImg || defaultImageUrl);
+  }, [getItem]);
+
+  useEffect(() => {
+    setWidgetStatus(widgetVisibility);
+  }, [widgetVisibility]);
+
+  // HANDLING
 
   const handleVisibility = (widgetId: string) => {
-    setWidgetVisibility(widgetVisibility => ({
-      ...widgetVisibility,
-      [widgetId]: !widgetVisibility[widgetId]
+    setWidgetVisibility(prev => ({
+      ...prev,
+      [widgetId]: !prev[widgetId]
     }));
   };
 
   const handleBgChange = (url: string) => {
     setBgImg(url);
+    setItem(url);
   };
-
-  useEffect(() => {
-    // Update the widget visibility status in local storage
-    localStorage.setItem('widgetVisibility', JSON.stringify(widgetVisibility));
-  }, [widgetVisibility]);
-
-  useEffect(() => {
-    // Update BG image in local storage
-    localStorage.setItem('BG', JSON.stringify(bgImg));
-  }, [bgImg]);
 
   return (
     <Wrapper bgImg={bgImg}>
