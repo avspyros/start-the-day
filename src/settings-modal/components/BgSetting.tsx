@@ -10,10 +10,21 @@ interface bgProps {
 function BgSetting({ id, inputLabel, onSubmit }: bgProps) {
   const [url, setUrl] = useState('');
 
+  const isURLValid = (input: string): boolean => {
+    const urlRegex = /^(https):\/\/[^ "]+$/;
+    return urlRegex.test(input);
+  };
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(url);
-    onSubmit(url);
+
+    if (url.trim() !== '' && isURLValid(url)) {
+      onSubmit(url);
+      setUrl('');
+    } else {
+      // Handle invalid or empty URL
+      console.error('Invalid or empty URL');
+    }
   };
 
   return (
@@ -28,10 +39,13 @@ function BgSetting({ id, inputLabel, onSubmit }: bgProps) {
             value={url}
             onChange={e => setUrl(e.target.value)}
             name="bgInput"
+            placeholder="add image url"
+            size="sm"
+            rounded="md"
             focusBorderColor="orange.500"
           />
         </FormControl>
-        <Button fontSize={{ base: '0.8rem', md: '0.8rem' }} type="submit">
+        <Button size="sm" fontSize="0.8rem" type="submit">
           Set BG
         </Button>
       </HStack>
