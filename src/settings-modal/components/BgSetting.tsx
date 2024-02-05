@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react';
-import { FormControl, FormLabel, Input, Button, HStack } from '@chakra-ui/react';
+import { Box, HStack, Text, Input, Button, FormControl, FormLabel } from '@chakra-ui/react';
 
 interface bgProps {
   id: string;
@@ -9,6 +9,7 @@ interface bgProps {
 
 function BgSetting({ id, inputLabel, onSubmit }: bgProps) {
   const [url, setUrl] = useState('');
+  const [error, setError] = useState('');
 
   const isURLValid = (input: string): boolean => {
     const urlRegex = /^(https):\/\/[^ "]+$/;
@@ -18,11 +19,12 @@ function BgSetting({ id, inputLabel, onSubmit }: bgProps) {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    if (url.trim() !== '' && isURLValid(url)) {
+    if (isURLValid(url)) {
       onSubmit(url);
       setUrl('');
+      setError('');
     } else {
-      // Handle invalid or empty URL
+      setError('Invalid URL');
       console.error('Invalid or empty URL');
     }
   };
@@ -39,7 +41,7 @@ function BgSetting({ id, inputLabel, onSubmit }: bgProps) {
             value={url}
             onChange={e => setUrl(e.target.value)}
             name="bgInput"
-            placeholder="add image url"
+            placeholder="Leave empty for default image"
             size="sm"
             rounded="md"
             focusBorderColor="orange.500"
@@ -49,6 +51,15 @@ function BgSetting({ id, inputLabel, onSubmit }: bgProps) {
           Set BG
         </Button>
       </HStack>
+      <Box mt={1}>
+        {!error ? (
+          <Text fontSize="0.8rem">Enter image URL from Unsplash, Pexels, etc.</Text>
+        ) : (
+          <Text fontSize="0.8rem" color="red.600">
+            Invalid image URL
+          </Text>
+        )}
+      </Box>
     </form>
   );
 }
