@@ -65,10 +65,10 @@ export default function App() {
         gap="6"
         sx={{ height: 'calc(100vh - 3rem)' }}
       >
-        <GridItem colStart={{ base: 1 }} colSpan={{ base: 12, md: 5, lg: 4 }}>
+        <GridItem colStart={{ base: 1 }} colSpan={{ base: 12, md: 5, lg: 4, xl: 3 }}>
           {!widgetVisibility.quote && <QuotesWidget />}
         </GridItem>
-        <GridItem colStart={{ base: 1, md: 8, lg: 9 }} colSpan={{ base: 12, md: 6, lg: 5 }}>
+        <GridItem colStart={{ base: 1, md: 8, lg: 9, xl: 10 }} colSpan={{ base: 12, md: 6, lg: 4 }}>
           {!widgetVisibility.weather && <WeatherWidget />}
         </GridItem>
         <GridItem
