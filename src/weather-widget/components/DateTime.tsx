@@ -2,18 +2,15 @@ import { useState, useEffect } from 'react';
 import { Box, Flex, Badge } from '@chakra-ui/react';
 
 function DateTime() {
-  const [localDate, setLocalDate] = useState('');
-  const [localTime, setLocalTime] = useState('');
+  const [dateTime, setDateTime] = useState({ date: '', time: '' });
 
   useEffect(() => {
     const getDateTime = () => {
-      let current = new Date();
+      const current = new Date();
+      const currentDate = current.toDateString();
+      const currentTime = current.toLocaleTimeString();
 
-      let currentDate = current.toDateString();
-      let currentTime = current.toLocaleTimeString();
-
-      setLocalDate(currentDate);
-      setLocalTime(currentTime);
+      setDateTime({ date: currentDate, time: currentTime });
     };
 
     getDateTime();
@@ -26,13 +23,13 @@ function DateTime() {
   }, []);
 
   return (
-    <Box>
+    <Box mb="4">
       <Flex justify="space-between" align="center">
         <Badge bg="orange.400" color="gray.700" borderRadius="4px" p=".1rem .4rem" fontSize=".9rem">
-          {localDate}
+          {dateTime.date}
         </Badge>
         <Badge bg="orange.400" color="gray.700" borderRadius="4px" p=".1rem .4rem" fontSize=".9rem">
-          {localTime}
+          {dateTime.time}
         </Badge>
       </Flex>
     </Box>

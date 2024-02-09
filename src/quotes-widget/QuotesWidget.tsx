@@ -1,47 +1,38 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Box, Flex, Heading, Text, IconButton, Spinner, Tooltip } from '@chakra-ui/react';
 import { RepeatIcon } from '@chakra-ui/icons';
 import { boxStyles } from '../globalStyles';
 
 function QuotesWidget() {
-  const [quoteResult, setQuoteResult] = useState<{ quote: string; source: string }>({
-    quote: '',
-    source: ''
-  });
+  const [quoteResult, setQuoteResult] = useState({ quote: '', source: '' });
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState(false);
 
-  let quotesArr = [];
-
-  const generateQuote = () => {
+  const generateQuote = useCallback(() => {
     const controller = new AbortController();
     setLoading(true);
     axios
       .get('https://philosophy-quotes-api.glitch.me/quotes', { signal: controller.signal })
       .then(res => {
-        quotesArr = res.data;
-        // console.log(quotesArr);
-        let randomQuoteIndex = Math.floor(Math.random() * quotesArr.length);
-        let randomQuote = quotesArr[randomQuoteIndex];
-        // console.log(randomQuote);
-        setError('');
+        const quotesArr = res.data;
+        const randomQuote = quotesArr[Math.floor(Math.random() * quotesArr.length)];
         setQuoteResult(randomQuote);
-        setLoading(false);
+        setError('');
       })
       .catch(err => {
-        console.log(err);
-        setQuoteResult({ quote: '', source: '' });
+        console.error(err);
         setError(err.message);
-        setLoading(false);
-      });
+        setQuoteResult({ quote: '', source: '' });
+      })
+      .finally(() => setLoading(false));
 
     return () => controller.abort();
-  };
+  }, []);
 
   useEffect(() => {
     generateQuote();
-  }, []);
+  }, [generateQuote]);
 
   return (
     <Box sx={boxStyles}>
@@ -55,18 +46,17 @@ function QuotesWidget() {
             aria-label="Generate Quote"
             colorScheme="orange"
             size="xs"
-            onClick={() => generateQuote()}
+            onClick={generateQuote}
           />
         </Tooltip>
       </Flex>
-
       {error && (
-        <Text fontSize="lg" color="red.500">
+        <Text fontSize="lg" color="red.400">
           {error}
         </Text>
       )}
       {loading && <Spinner color="orange.400" />}
-      {quoteResult && (
+      {quoteResult.quote && (
         <>
           <Text as="cite" fontSize={{ base: '0.9rem', md: '1rem' }} color="orange.400">
             {quoteResult.quote}

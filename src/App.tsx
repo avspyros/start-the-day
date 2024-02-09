@@ -31,7 +31,7 @@ export default function App() {
       }
   );
 
-  // SIDE EFFECTS
+  // EFFECTS
 
   useEffect(() => {
     const storedBgImg = getItem();
