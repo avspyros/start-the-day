@@ -30,7 +30,7 @@ export default function TaskList({ tasks, completeTask, deleteTask }: TaskListPr
                 onChange={() => completeTask(task.id)}
               ></Checkbox>
               <Text
-                fontSize={{ base: 'lg', md: 'xl' }}
+                fontSize={{ base: 'sm', md: 'md', lg: 'lg' }}
                 pb="4px"
                 cursor="pointer"
                 textDecoration={task.completed ? 'line-through' : ''}
