@@ -20,6 +20,7 @@ interface WidgetVisibility {
 export default function App() {
   const { setItem, getItem } = useLocalStorage('BG');
   const [bgImg, setBgImg] = useState(defaultImageUrl);
+
   const { getItem: getWidgetStatus, setItem: setWidgetStatus } = useLocalStorage('widgetVisibility');
   const [widgetVisibility, setWidgetVisibility] = useState<WidgetVisibility>(
     () =>
@@ -39,7 +40,7 @@ export default function App() {
 
   useEffect(() => {
     setWidgetStatus(widgetVisibility);
-  }, [widgetVisibility]);
+  }, [widgetVisibility, setWidgetStatus]);
 
   // HANDLING
 
