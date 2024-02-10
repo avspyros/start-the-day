@@ -12,6 +12,7 @@ function QuotesWidget() {
   const generateQuote = useCallback(() => {
     const controller = new AbortController();
     setLoading(true);
+    setQuoteResult({ quote: '', source: '' });
     axios
       .get('https://philosophy-quotes-api.glitch.me/quotes', { signal: controller.signal })
       .then(res => {
