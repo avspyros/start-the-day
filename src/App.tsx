@@ -64,24 +64,29 @@ export default function App() {
         gridTemplateColumns="repeat(12, 1fr)"
         gridTemplateRows="repeat(6, 1fr)"
         gap="6"
-        sx={{ height: 'calc(100vh - 3rem)' }}
+        sx={{ height: 'calc(100vh - 2.5rem)' }}
       >
+        {/* QuotesWidget */}
         <GridItem colStart={{ base: 1 }} colSpan={{ base: 12, md: 5, lg: 4, xl: 3 }}>
           {!widgetVisibility.quote && <QuotesWidget />}
         </GridItem>
+        {/* WeatherWidget */}
         <GridItem colStart={{ base: 1, md: 8, lg: 9, xl: 10 }} colSpan={{ base: 12, md: 6, lg: 4 }}>
           {!widgetVisibility.weather && <WeatherWidget />}
         </GridItem>
+        {/* TaskWidget */}
         <GridItem
           colStart={{ base: 1, md: 3, lg: 4, xl: 5 }}
           colSpan={{ base: 12, md: 8, lg: 6, xl: 4 }}
-          rowStart={{ base: 3 }}
+          rowStart={{ base: 3, md: 2 }}
           rowSpan={{ base: 2 }}
         >
           {!widgetVisibility.tasks && <TaskWidget />}
         </GridItem>
+        <GridItem colSpan={12} rowStart={6} alignSelf="end">
+          <Footer />
+        </GridItem>
       </Grid>
-      <Footer />
     </Wrapper>
   );
 }
