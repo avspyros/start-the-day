@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Box, Flex, Heading, Text, IconButton, Spinner, Tooltip } from '@chakra-ui/react';
 import { RepeatIcon } from '@chakra-ui/icons';
-import { boxStyles } from '../globalStyles';
+import { widgetStyle } from '../globalStyles';
 
 function QuotesWidget() {
   const [quoteResult, setQuoteResult] = useState({ quote: '', source: '' });
@@ -36,7 +36,7 @@ function QuotesWidget() {
   }, [generateQuote]);
 
   return (
-    <Box sx={boxStyles}>
+    <Box sx={widgetStyle}>
       <Flex justify="space-between">
         <Heading as="h3" fontSize="lg" mb="1rem">
           Quote of the day

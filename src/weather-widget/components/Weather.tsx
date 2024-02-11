@@ -51,8 +51,8 @@ function Weather() {
         </Text>
       )}
       {currentWeather && (
-        <HStack justify="space-evenly" bg="whiteAlpha.300" borderRadius="4px" px="0.5rem">
-          <Heading as="h3" fontSize={{ base: 'sm', md: 'md' }} fontWeight="400" color="gray.400">
+        <HStack justify="space-evenly" bg="blue.400" borderRadius="4px" px="0.5rem">
+          <Heading as="h3" fontSize={{ base: 'sm', md: 'md' }} fontWeight="500">
             ATHENS
           </Heading>
 
@@ -63,10 +63,10 @@ function Weather() {
             </Text>
           </Text>
           <VStack gap="0">
-            <Text fontSize={{ base: 'sm', md: 'md' }} fontWeight="400" color="yellow.300">
+            <Text fontSize={{ base: 'sm', md: 'md' }} fontWeight="400" color="yellow.200">
               {max}
             </Text>
-            <Text fontSize={{ base: 'sm', md: 'md' }} fontWeight="400" color="blue.300">
+            <Text fontSize={{ base: 'sm', md: 'md' }} fontWeight="400" color="blue.800">
               {min}
             </Text>
           </VStack>

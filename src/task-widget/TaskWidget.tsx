@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Box } from '@chakra-ui/react';
-import { boxStyles } from '../globalStyles';
+import { widgetStyle } from '../globalStyles';
 import TaskHeader from './components/TaskHeader';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
@@ -42,7 +42,7 @@ export default function TaskWidget() {
   }, [tasks]);
 
   return (
-    <Box sx={boxStyles}>
+    <Box sx={widgetStyle}>
       <TaskHeader tasks={tasks} clearTasks={clearTasks} />
       <TaskForm singleTask={singleTask} setSingleTask={setSingleTask} addTask={addTask} />
       <TaskList tasks={tasks} completeTask={completeTask} deleteTask={deleteTask} />

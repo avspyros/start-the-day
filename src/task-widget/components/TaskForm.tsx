@@ -20,6 +20,8 @@ const TaskForm: React.FC<TaskFormProps> = ({ singleTask, setSingleTask, addTask 
           <Input
             mb="2rem"
             mr={2}
+            p={2}
+            focusBorderColor="orange.400"
             name="taskInput"
             value={singleTask}
             onChange={e => setSingleTask(e.currentTarget.value)}
