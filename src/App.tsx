@@ -67,7 +67,7 @@ export default function App() {
         sx={{ height: 'calc(100vh - 2.5rem)' }}
       >
         {/* QuotesWidget */}
-        <GridItem colStart={{ base: 1 }} colSpan={{ base: 12, md: 5, lg: 4, xl: 3 }}>
+        <GridItem colStart={1} colSpan={{ base: 12, md: 5, lg: 4, xl: 3 }}>
           {!widgetVisibility.quote && <QuotesWidget />}
         </GridItem>
         {/* WeatherWidget */}
@@ -83,7 +83,7 @@ export default function App() {
         >
           {!widgetVisibility.tasks && <TaskWidget />}
         </GridItem>
-        <GridItem colSpan={12} rowStart={6} alignSelf="end">
+        <GridItem colStart={1} colEnd={{ base: 13, md: 14, lg: 13, xl: 14 }} rowStart={6} alignSelf="end">
           <Footer />
         </GridItem>
       </Grid>
