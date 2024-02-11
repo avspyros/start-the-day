@@ -19,7 +19,7 @@ function BgSetting({ id, inputLabel, onSubmit }: bgProps) {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    if (isURLValid(url)) {
+    if (isURLValid(url) || url === '') {
       onSubmit(url);
       setUrl('');
       setError('');

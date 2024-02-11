@@ -50,7 +50,7 @@ function Settings({ handleVisibility, widgetVisibility, handleSubmit }: SettingP
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent bg="skyblue">
+        <ModalContent bg="blue.300">
           <ModalHeader>Settings</ModalHeader>
           <ModalCloseButton />
           <ModalBody>

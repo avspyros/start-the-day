@@ -5,7 +5,7 @@ function Footer() {
   return (
     <Box sx={boxStyle}>
       <Center>
-        <Text color="gray.400">Start-the-day - Avspyros &copy; {new Date().getFullYear()}</Text>
+        <Text color="white">Start-the-day - Avspyros &copy; {new Date().getFullYear()}</Text>
       </Center>
     </Box>
   );
