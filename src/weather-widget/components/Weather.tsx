@@ -14,39 +14,45 @@ interface weatherDisplay {
 }
 
 function Weather() {
-  const [currentWeather, setCurrentWeather] = useState<weatherDisplay | null>();
+  const [currentWeather, setCurrentWeather] = useState<weatherDisplay | null>(null);
   const [error, setError] = useState<string>('');
 
-  const fetchWeather = () => {
-    axios
-      .get(weatherUrl)
-      .then(res => {
-        // console.log(res.data.main);
-        const data = res.data;
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        const response = await axios.get(weatherUrl);
+        const weather = response.data;
+        // console.log(weather);
 
         const weatherData = {
-          temperature: Math.round(data.main.temp),
-          description: data.weather[0].description,
-          icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`,
-          min: Math.round(data.main.temp_min),
-          max: Math.round(data.main.temp_max)
+          temperature: Math.round(weather.main.temp),
+          min: Math.round(weather.main.temp_min),
+          max: Math.round(weather.main.temp_max),
+          description: weather.weather[0].description,
+          icon: `https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`
         };
-
+        setError('');
         setCurrentWeather(weatherData);
-      })
-      .catch(err => setError(err.message));
-  };
-
-  useEffect(() => {
+      } catch (err) {
+        if (axios.isAxiosError(err)) {
+          console.error('Axios Error fetching data', err.message);
+          setCurrentWeather(null);
+          setError(err.message);
+        } else {
+          console.error('Something went wrong!');
+          setError('Something went wrong!');
+        }
+      }
+    };
     fetchWeather();
   }, []);
 
-  const { temperature, description, icon, min, max } = currentWeather || {};
+  const { temperature, min, max, description, icon } = currentWeather || {};
 
   return (
     <Box>
       {error && (
-        <Text fontSize="lg" color="red.500">
+        <Text fontSize="lg" color="red.400">
           {error}
         </Text>
       )}
