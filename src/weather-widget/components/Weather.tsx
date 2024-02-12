@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { BASE_URL, API_KEY } from '../../services';
 import axios from 'axios';
+import { BASE_URL, API_KEY } from '../../services';
 import { Box, VStack, HStack, Heading, Text, Image, Tooltip } from '@chakra-ui/react';
 
 const weatherUrl = `${BASE_URL}/data/2.5/weather?lat=37.9838&lon=23.7278&appid=${API_KEY}&units=metric`;
